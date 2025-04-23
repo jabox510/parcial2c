@@ -1,21 +1,15 @@
 package com.example.parcial2c.Model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;  // Importar esta anotación
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.List;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-import java.util.Date;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Entrenador {
 
     @Id
@@ -25,4 +19,8 @@ public class Entrenador {
     private String nombre;
     private String especialidad;
 
-    }
+    @ManyToOne
+    @JoinColumn(name = "id_equipo")
+    @JsonBackReference
+    private Equipo equipo;
+}

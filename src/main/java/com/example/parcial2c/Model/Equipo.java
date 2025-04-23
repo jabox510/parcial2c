@@ -4,18 +4,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonManagedReference;  // Importar esta anotación
 import java.util.List;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
 import java.util.Date;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Equipo {
 
     @Id
@@ -26,8 +22,12 @@ public class Equipo {
     private String ciudad;
     private Date fechafundacion;
 
+    @OneToMany(mappedBy = "equipo")
+    @JsonManagedReference
+    private List<Jugador> jugadores;
 
-
-
-
+    @OneToMany(mappedBy = "equipo")
+    @JsonManagedReference
+    private List<Entrenador> entrenadores;
 }
+
